@@ -1,0 +1,66 @@
+<script type="text/javascript">
+  function countChars(countfrom,displayto) {
+    var len = document.getElementById(countfrom).value.length;
+    document.getElementById(displayto).innerHTML = len;
+  }
+</script>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <p class="alert" id="notice"><%= notice %></p>
+
+      <h1>199th Ward MassText</h1>
+      <h3>This site is not affiliated with the Church of Jesus Christ of Latter-day Saints in any way.</h3>
+
+      <br>
+
+      <form action="/send_texts/" method="POST">
+        Your message:<br>
+        <textarea id="data" name="message" rows="10" cols="50" onkeyup="countChars('data','charcount');" onkeydown="countChars('data','charcount');" onmouseout="countChars('data','charcount');"></textarea><br>
+        <span id="charcount">0</span>
+        <input type="submit" value="Send out a mass text!">
+
+        <br>
+        <br>
+        <h4><%= link_to 'Add New Ward Member', new_contact_path %></h4>
+        <br>
+        <br>
+
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Send?</th>
+              <th>Name</th>
+              <th>Number</th>
+              <th>Email</th>
+              <th>Eq</th>
+              <th>Rs</th>
+              <th>Wc</th>
+              <th colspan="7"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @contacts.each do |contact| %>
+              <tr>
+                <td><input type="checkbox" name="contact_<%= contact.id %>" value="<%= contact.id %>"></td>
+                <td><%= contact.name %></td>
+                <td><%= contact.number %></td>
+                <td><%= contact.email %></td>
+                <td class="<%= "success" if contact.eq == true %>"><%= contact.eq %></td>
+                <td class="<%= "success" if contact.rs == true %>"><%= contact.rs %></td>
+                <td class="<%= "success" if contact.wc == true %>"><%= contact.wc %></td>
+                <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+                <td><%= link_to 'Delete', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+      </form>
+
+      <br>
+
+    </div>
+  </div>
+</div>

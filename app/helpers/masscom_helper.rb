@@ -1,0 +1,2 @@
+module MasscomHelper
+end

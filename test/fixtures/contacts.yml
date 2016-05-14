@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  number: MyString
+  email: MyString
+  eq: false
+  rs: false
+  wc: false
+
+two:
+  name: MyString
+  number: MyString
+  email: MyString
+  eq: false
+  rs: false
+  wc: false

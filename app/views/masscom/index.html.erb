@@ -1,0 +1,53 @@
+<h1>MassText</h1>
+<h3>This site is not affiliated with the Church of Jesus Christ of Latter-day Saints in any way, shape, or form.</h3>
+<br>
+
+<form action="/message/" method="POST">
+  Your message:<br>
+  <textarea id="data" name="message" rows="10" cols="50" onkeyup="countChars('data','charcount');" onkeydown="countChars('data','charcount');" onmouseout="countChars('data','charcount');"></textarea><br>
+  <span id="charcount">0</span>
+  <input type="submit" value="Send out a mass text!">
+</form>
+
+<%= form_for @person do |f| %>
+  <%= f.label :name %>:
+  <%= f.text_field :name %><br />
+
+  <%= f.label :number %>:
+  <%= f.text_field :number %><br />
+
+  <%= f.label :email %>:
+  <%= f.text_field :email %><br />
+
+  <%= f.submit %>
+<% end %>
+
+<!-- <form action="/add_number/" method="POST">
+    Name: <input type="text" name="name">
+    <br/>
+    Number: <input type="text" name="number">
+    <br/>
+    Email: <input type="text" name="email">
+    <br/>
+    <input type="submit" value="Add a number!">
+</form> -->
+
+<% for number in @numbers do %>
+  <div>
+    <p style="display:inline"><%= number.name %> : <%= number.number %> : <%= number.email %></p>
+    <form action="/delete_number/" method="POST" style="display:inline">
+      <input type="hidden" name="id" value="<%= number.id %>">
+      <input type="submit" value="Delete this number!">
+    </form>
+    <form action="/edit_number/<%= number.id %>" style="display:inline">
+      <input type="submit" value="Edit this number!">
+    </form>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+function countChars(countfrom,displayto) {
+  var len = document.getElementById(countfrom).value.length;
+  document.getElementById(displayto).innerHTML = len;
+}
+</script>
