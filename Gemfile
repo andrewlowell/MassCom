@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'twilio-ruby'
-gem 'dotenv-rails'
+gem 'figaro'
 gem 'bootstrap-sass'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
